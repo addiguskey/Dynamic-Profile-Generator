@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <title>Dynamic Profile Generator</title>
+  </head>
+  <!-- BODY -->
+  <body>
+    <!-- JUMBOTRON DIV -->
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">My Team</h1>
+        <p class="lead">
+          <img src="../images/team.png" style="width: 6%; height: 6%" />
+          Meet our team members!
+        </p>
+      </div>
+    </div>
+    <!-- DIV FOR ALL CARDS -->
+    <div id="all-cards" class="row d-flex mx-auto">
+      <!-- CARD 1 : Manager-->
+      <div class="col-md-4">
+        <div class="card mb-4 mx-auto" style="width: 18rem">
+          <div class="card-body bg-dark text-light">
+            <h5 class="manager card-title">NAME</h5>
+            <p class="card-text">
+              <img
+                src="../images/manager.png"
+                style="width: 12%; height: 12%"
+              />Manager
+            </p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">ID:</li>
+            <li class="list-group-item">
+              Email:<a href="mailto:addisonguskey@gmail.com"></a>
+                addisonguskey@gmail.com</a
+              >
+            </li>
+            <li class="list-group-item">Office Number:</li>
+          </ul>
+          <!-- <div class="card-body">
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+          </div> -->
+        </div>
+      </div>
+
+      <!-- CARD2 : Engineer -->
+      <div class="col-md-4">
+        <div class="card mb-4 mx-auto" style="width: 18rem">
+          <div class="card-body bg-dark text-light">
+            <h5 class="engineer card-title">Eng Name</h5>
+            <p class="card-text">
+              <img src="../images/dev.png" style="width: 12%; height: 12%" />
+              Engineer
+            </p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">ID:</li>
+            <li class="list-group-item">
+              Email:<a href="mailto:addisonguskey@gmail.com">
+                addisonguskey@gmail.com</a
+              >
+            </li>
+            <li class="list-group-item">
+              GitHub:
+              <a
+                href="https://github.com/addiguskey"
+                target="
+              _blank"
+                >https://github.com/addiguskey</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CARD3 : Intern-->
+      <div class="col-md-4">
+        <div class="card mb-4 mx-auto" style="width: 18rem">
+          <div class="card-body bg-dark text-light">
+            <h5 class="card-title">Intern Name</h5>
+            <p class="card-text">
+              <img src="../images/intern.png" style="width: 12%; height: 12%" />
+              Intern
+            </p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">ID:</li>
+            <li class="list-group-item">
+              Email:<a href="mailto:addisonguskey@gmail.com">
+                addisonguskey@gmail.com</a
+              >
+            </li>
+            <li class="list-group-item">School:</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
