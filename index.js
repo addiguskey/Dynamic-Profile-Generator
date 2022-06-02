@@ -3,14 +3,15 @@
 // const
 const inquirer = require("inquirer");
 const fs = require("fs");
-const { log } = require("console");
-const ExpandPrompt = require("inquirer/lib/prompts/expand");
 const employees = [];
+const Manager = require("./lib/manager");
+const Engineer = require("./lib/engineer");
+const Intern = require("./lib/intern");
 managerPrompts();
 
 // TODO: Create an array of questions for user input
 //function for each position
-function managerPrompts(manager) {
+function managerPrompts() {
   inquirer
     .prompt([
       {
@@ -37,9 +38,14 @@ function managerPrompts(manager) {
     ])
     .then((manager) => {
       console.log(manager);
-      //import manager class and create manager class type
+      const manager2 = new Manager(
+        manager.managerName,
+        manager.managerID,
+        manager.managerEmail,
+        manager.managerOffice
+      );
+      employees.push(manager2);
       newMember();
-      // employees.push(newManager);
     });
 }
 function engPrompts(eng) {
@@ -69,6 +75,13 @@ function engPrompts(eng) {
     .then((eng) => {
       console.log(eng);
       //import eng class and create eng class type
+      const engineer2 = new Engineer(
+        eng.engName,
+        eng.engID,
+        eng.engEmail,
+        eng.engGithub
+      );
+      employees.push(engineer2);
       newMember();
     });
 }
@@ -99,6 +112,14 @@ function intPrompts() {
     .then((int) => {
       console.log(int);
       //import int class and create int class type
+      const intern2 = new Intern(
+        int.intName,
+        int.intID,
+        int.intEmail,
+        int.intSchool
+      );
+      employees.push(intern2);
+
       newMember();
     });
 }
@@ -119,25 +140,23 @@ function newMember() {
       },
     ])
     .then((response) => {
-      if (response.nextMember === "Engineer") {
+      console.log(response);
+      if (response.nextMember[0] === "Engineer") {
         engPrompts();
-      } else if (response.nextMember === "Intern") {
+      } else if (response.nextMember[0] === "Intern") {
         intPrompts();
       } else {
-        htmlGenerator();
+        htmlGenerator(employees);
       }
     });
 }
-
-//     fs.writeFile("index.html", htmlTemplate, (err) => {
-//       err ? console.log(err) : console.log("html has been generated!");
 
 //separate functions for creating intern/eng cards
 
 function genManagerCard(manager) {
   const templateManager = `<div class="card employee-card">
                <div class="card-header bg-dark text-light">
-                 <h2 class="manager card-title">${manager.managerName}</h2>
+                 <h2 class="manager card-title">${manager.name}</h2>
                  <h3 class="card-title">
                    <img
                     src="../images/manager.png"
@@ -147,10 +166,10 @@ function genManagerCard(manager) {
               </div>
               <div class="card-body">
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">ID:${manager.managerID}</li>
+                  <li class="list-group-item">ID:${manager.id}</li>
                   <li class="list-group-item">
-                    Email:<a href="mailto:${manager.managerEmail}"
-                      >${manager.managerEmail}</a
+                    Email:<a href="mailto:${manager.email}"
+                      >${manager.email}</a
                     >
                   </li>
                   <li class="list-group-item">Office Number:</li>
@@ -162,7 +181,7 @@ function genManagerCard(manager) {
 function genEngCard(eng) {
   const templateEng = `<div class="card employee-card">
               <div class="card-header bg-dark text-light">
-                <h2 class="manager card-title">NAME</h2>
+                <h2 class="manager card-title">${eng.name}</h2>
                 <h3 class="card-title">
                   <img
                     src="../images/dev.png"
@@ -172,15 +191,15 @@ function genEngCard(eng) {
               </div>
               <div class="card-body">
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">ID:${eng.engID}</li>
+                  <li class="list-group-item">ID:${eng.getId()}</li>
                   <li class="list-group-item">
-                    Email:<a href="mailto:${eng.engEmail}"
-                      >${eng.engEmail}</a
+                    Email:<a href="mailto:${eng.getEmail()}"
+                      >${eng.getEmail()}</a
                     >
                   </li>
                   <li class="list-group-item">
                     GitHub:
-                    <a href="${eng.engGithub}" target="_blank"
+                    <a href="${eng.getGithub()}" target="_blank"
                       >@addiguskey</a
                     >
                   </li>
@@ -194,7 +213,7 @@ function genEngCard(eng) {
 function genIntCard(int) {
   const templateInt = `<div class="card employee-card">
               <div class="card-header bg-dark text-light">
-                <h2 class="manager card-title">${int.intName}</h2>
+                <h2 class="manager card-title">${int.name}</h2>
                 <h3 class="card-title">
                   <img
                     src="../images/intern.png"
@@ -204,10 +223,10 @@ function genIntCard(int) {
               </div>
               <div class="card-body">
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">ID:${int.intID}</li>
+                  <li class="list-group-item">ID:${int.id}</li>
                   <li class="list-group-item">
-                    Email:<a href="mailto:${int.intEmail}"
-                      >${int.intEmail}</a>
+                    Email:<a href="mailto:${int.email}"
+                      >${int.email}</a>
                   </li>
                   <li class="list-group-item">School:${int.intSchool}</li>
                 </ul>
@@ -217,7 +236,7 @@ function genIntCard(int) {
 }
 
 function htmlGenerator(employees) {
-  const htmlTemp1 = `<!DOCTYPE html>
+  let htmlTemp1 = `<!DOCTYPE html>
   <html lang="en">
     <head>
       <meta charset="UTF-8" />
@@ -245,22 +264,26 @@ function htmlGenerator(employees) {
       <!-- DIV FOR ALL CARDS -->
       <div class="container">
         <div id="all-cards" class="row">
-          <div class="tem-area col-12 d-flex justify-content-center"> ${genManagerCard()}
-          ${genEngCard()}
-          ${genIntCard()}
-           </div>
+          <div class="tem-area col-12 d-flex justify-content-center">`;
+
+  const htmlTemp2 = `</div>
         </div>
       </div>
     </body>
   </html>`;
-  // for (let i = 0; i < employees.length; i++) {
-  //   //each employee obj nees getRole()
-  //   if (employees[i].getRole() === "Manager") {
-  //     htmlTemp1 += genManagerCard(employees[i]);
-  //   } else if (employees[i].getRole() === "Engineer") {
-  //     htmlTemp1 += genEngCard(employees[i]);
-  //   } else if (employees[i].getRole() === "Intern") {
-  //     htmlTemp1 += genIntCard(employees[i]);
-  //   }
-  // }
+
+  for (let i = 0; i < employees.length; i++) {
+    //each employee obj nees getRole()
+    if (employees[i].getRole() === "manager") {
+      htmlTemp1 += genManagerCard(employees[i]);
+    } else if (employees[i].getRole() === "engineer") {
+      htmlTemp1 += genEngCard(employees[i]);
+    } else if (employees[i].getRole() === "intern") {
+      htmlTemp1 += genIntCard(employees[i]);
+    }
+  }
+  htmlTemp1 += htmlTemp2;
+  fs.writeFile("index.html", htmlTemp1, (err) => {
+    err ? console.log(err) : console.log("html has been generated!");
+  });
 }

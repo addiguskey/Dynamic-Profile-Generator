@@ -1,4 +1,3 @@
-const { exportAllDeclaration } = require("@babel/types");
 const Employee = require("../lib/employee");
 
 describe("Employee", () => {
