@@ -1,6 +1,4 @@
-// TODO: Include packages needed for this application
-// import class file
-// const
+//packages needed for this application
 const inquirer = require("inquirer");
 const fs = require("fs");
 const employees = [];
@@ -9,7 +7,7 @@ const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 managerPrompts();
 
-// TODO: Create an array of questions for user input
+//array of questions for user input
 //function for each position
 function managerPrompts() {
   inquirer
@@ -48,7 +46,8 @@ function managerPrompts() {
       newMember();
     });
 }
-function engPrompts(eng) {
+//Engineer Prompts
+function engPrompts() {
   inquirer
     .prompt([
       {
@@ -85,6 +84,8 @@ function engPrompts(eng) {
       newMember();
     });
 }
+
+//Intern Prompts
 function intPrompts() {
   inquirer
     .prompt([
@@ -123,8 +124,8 @@ function intPrompts() {
       newMember();
     });
 }
-//
 
+//New Member function
 function newMember() {
   inquirer
     .prompt([
@@ -151,8 +152,9 @@ function newMember() {
     });
 }
 
-//separate functions for creating intern/eng cards
+//separate functions for creating different roles' cards
 
+//Manager Card
 function genManagerCard(manager) {
   const templateManager = `<div class="card employee-card">
                <div class="card-header bg-dark text-light">
@@ -172,12 +174,14 @@ function genManagerCard(manager) {
                       >${manager.email}</a
                     >
                   </li>
-                  <li class="list-group-item">Office Number:</li>
+                  <li class="list-group-item">Office Number:${manager.officeNumber}</li>
                 </ul>
               </div>
             </div>`;
   return templateManager;
 }
+
+//Engineer Card
 function genEngCard(eng) {
   const templateEng = `<div class="card employee-card">
               <div class="card-header bg-dark text-light">
@@ -191,16 +195,16 @@ function genEngCard(eng) {
               </div>
               <div class="card-body">
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">ID:${eng.getId()}</li>
+                  <li class="list-group-item">ID:${eng.id}</li>
                   <li class="list-group-item">
-                    Email:<a href="mailto:${eng.getEmail()}"
-                      >${eng.getEmail()}</a
+                    Email:<a href="mailto:${eng.email}"
+                      >${eng.email}</a
                     >
                   </li>
                   <li class="list-group-item">
                     GitHub:
-                    <a href="${eng.getGithub()}" target="_blank"
-                      >@addiguskey</a
+                    <a href="https://github.com/${eng.gitHub}" target="_blank"
+                      >@${eng.gitHub}</a
                     >
                   </li>
                 </ul>
@@ -210,6 +214,7 @@ function genEngCard(eng) {
   return templateEng;
 }
 
+//Intern Cards
 function genIntCard(int) {
   const templateInt = `<div class="card employee-card">
               <div class="card-header bg-dark text-light">
@@ -228,13 +233,14 @@ function genIntCard(int) {
                     Email:<a href="mailto:${int.email}"
                       >${int.email}</a>
                   </li>
-                  <li class="list-group-item">School:${int.intSchool}</li>
+                  <li class="list-group-item">School:${int.school}</li>
                 </ul>
               </div>
             </div>`;
   return templateInt;
 }
 
+//function for HTML generator
 function htmlGenerator(employees) {
   let htmlTemp1 = `<!DOCTYPE html>
   <html lang="en">
@@ -274,11 +280,11 @@ function htmlGenerator(employees) {
 
   for (let i = 0; i < employees.length; i++) {
     //each employee obj nees getRole()
-    if (employees[i].getRole() === "manager") {
+    if (employees[i].getRole() === "Manager") {
       htmlTemp1 += genManagerCard(employees[i]);
-    } else if (employees[i].getRole() === "engineer") {
+    } else if (employees[i].getRole() === "Engineer") {
       htmlTemp1 += genEngCard(employees[i]);
-    } else if (employees[i].getRole() === "intern") {
+    } else if (employees[i].getRole() === "Intern") {
       htmlTemp1 += genIntCard(employees[i]);
     }
   }
