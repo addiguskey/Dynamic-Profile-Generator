@@ -16,9 +16,11 @@ SO THAT I have quick access to their emails and GitHub profiles
 
 # Installation
 
-Clone this SSH Key link (git@github.com:addiguskey/Dynamic-Profile-Generator.git) on your Terminal (Mac) or gitBash(Windows).
+1. Clone this SSH Key link: "git@github.com:addiguskey/Dynamic-Profile-Generator.git" on your Terminal (Mac) or gitBash(Windows).
 
-- Step by step guide video is attached below in [Usage](#usage)
+2. This app uses [Jest](https://www.npmjs.com/package/jest) and [Inquirer](https://www.npmjs.com/package/inquirer). You can simply install these by running "npm i" on your Integrated Terminal in VS-Code
+
+3. Step by step guide video on how to use this app after cloning, is attached below in [Usage](#usage)
 
 # Usage
 
