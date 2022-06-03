@@ -168,13 +168,13 @@ function genManagerCard(manager) {
               </div>
               <div class="card-body">
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">ID:${manager.id}</li>
+                  <li class="list-group-item">ID: ${manager.id}</li>
                   <li class="list-group-item">
-                    Email:<a href="mailto:${manager.email}"
+                    Email: <a href="mailto:${manager.email}"
                       >${manager.email}</a
                     >
                   </li>
-                  <li class="list-group-item">Office Number:${manager.officeNumber}</li>
+                  <li class="list-group-item">Office Number: #${manager.officeNumber}</li>
                 </ul>
               </div>
             </div>`;
@@ -195,9 +195,9 @@ function genEngCard(eng) {
               </div>
               <div class="card-body">
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">ID:${eng.id}</li>
+                  <li class="list-group-item">ID: ${eng.id}</li>
                   <li class="list-group-item">
-                    Email:<a href="mailto:${eng.email}"
+                    Email: <a href="mailto:${eng.email}"
                       >${eng.email}</a
                     >
                   </li>
@@ -222,18 +222,18 @@ function genIntCard(int) {
                 <h3 class="card-title">
                   <img
                     src="../images/intern.png"
-                    style="width: 12%; height: 12%"
+                    style="width: 13%; height: 13%"
                   />Intern
                 </h3>
               </div>
               <div class="card-body">
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">ID:${int.id}</li>
+                  <li class="list-group-item">ID: ${int.id}</li>
                   <li class="list-group-item">
-                    Email:<a href="mailto:${int.email}"
+                    Email: <a href="mailto:${int.email}"
                       >${int.email}</a>
                   </li>
-                  <li class="list-group-item">School:${int.school}</li>
+                  <li class="list-group-item">School: ${int.school}</li>
                 </ul>
               </div>
             </div>`;
